@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>웰체크 홍보물 신청</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo',sans-serif;background:#E8EFF8;min-height:100vh;padding:1.5rem 1rem}
+.page{background:#fff;max-width:1000px;margin:0 auto;border-radius:18px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.07),0 12px 40px rgba(0,0,0,.07)}
+
+/* 헤더 */
+.top-header{display:flex;align-items:center;gap:18px;padding:2rem 2.5rem;background:linear-gradient(135deg,#D6E8FF 0%,#BDD4FF 100%);border-bottom:1px solid #AECBF5}
+.logo-img{width:58px;height:58px;border-radius:15px;object-fit:cover;flex-shrink:0;box-shadow:0 4px 14px rgba(37,99,235,.3)}
+.header-text h1{font-size:25px;font-weight:900;color:#1A3360;letter-spacing:-.5px}
+.header-text p{font-size:14px;color:#3B5E8C;margin-top:5px}
+
+.inner{padding:1.5rem 2rem 2.5rem}
+
+/* 공지 */
+.notice-box{display:flex;gap:12px;align-items:flex-start;background:#FFF3CD;border:2px solid #F59E0B;border-radius:12px;padding:16px 20px;margin-bottom:1.75rem;box-shadow:0 2px 8px rgba(245,158,11,.15)}
+.notice-icon{font-size:22px;flex-shrink:0;margin-top:0px}
+.notice-label{font-size:13px;font-weight:800;color:#92400E;margin-bottom:4px;letter-spacing:.01em}
+.notice-text{font-size:13px;color:#78350F;line-height:1.6}
+.notice-text strong{font-weight:800;color:#B45309}
+.section-title{font-size:15px;font-weight:700;color:#374151;letter-spacing:.02em;margin-bottom:1rem}
+
+/* 탭 */
+.tab-bar{display:flex;border-bottom:1px solid #E5E7EB;margin-bottom:1.25rem;gap:6px}
+.tab-btn{position:relative;padding:11px 22px;font-size:15px;font-weight:600;color:#6B7280;background:#F1F5F9;border:none;border-radius:8px 8px 0 0;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
+.tab-btn:hover{color:#185FA5;background:#E6F1FB}
+.tab-btn.active{color:#fff;font-weight:700;background:#185FA5}
+.tab-btn.active::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;background:#185FA5;border-radius:2px 2px 0 0}
+.tab-badge{display:inline-block;font-size:11px;padding:1px 7px;border-radius:20px;margin-left:5px;background:#F3F4F6;color:#6B7280;vertical-align:middle;font-weight:500}
+.tab-btn.active .tab-badge{background:rgba(255,255,255,.25);color:#fff}
+.sales-notice{display:flex;gap:8px;align-items:flex-start;background:#F8FAFF;border:1.5px solid #93C5FD;border-radius:8px;padding:10px 14px;margin-bottom:1.25rem;font-size:13px;color:#3B5E8C}
+
+/* 카드 그리드 */
+.items-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:2rem}
+.item-card{background:#fff;border:1px solid #E5E7EB;border-radius:14px;padding:2.5rem 1rem 1rem;cursor:pointer;transition:all .15s;position:relative}
+.item-card:hover{border-color:#93C5FD;box-shadow:0 2px 14px rgba(24,95,165,.09)}
+.item-card.selected{border:2px solid #185FA5;background:#EFF6FF}
+
+/* 이미지 */
+.item-img{width:100%;height:280px;background:#F3F7FF;border-radius:10px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;cursor:pointer}
+.item-img img{width:100%;height:100%;object-fit:contain;border-radius:10px;display:block}
+.img-placeholder{display:flex;flex-direction:column;align-items:center;gap:8px;color:#9CA3AF;font-size:13px}
+.img-loading{display:flex;flex-direction:column;align-items:center;gap:8px;color:#9CA3AF;font-size:12px}
+.img-spinner{width:24px;height:24px;border:2px solid #E5E7EB;border-top-color:#185FA5;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.img-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.38);border-radius:10px;opacity:0;transition:opacity .15s}
+.item-img:hover .img-overlay{opacity:1}
+.img-overlay span{color:white;font-size:12px;background:rgba(0,0,0,.55);padding:5px 12px;border-radius:20px}
+
+.item-name{font-size:13px;font-weight:700;color:#111827;margin-bottom:3px;line-height:1.4}
+.item-unit{font-size:12px;color:#6B7280;margin-bottom:6px}
+.item-unit-special{font-size:12px;font-weight:700;color:#185FA5;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:5px;padding:2px 8px;display:inline-block;margin-bottom:6px}
+.card-actions{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+.qty-row{display:flex;align-items:center;gap:6px}
+.qty-btn{width:30px;height:30px;border:1px solid #D1D5DB;border-radius:8px;background:#fff;color:#374151;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
+.qty-btn:hover{background:#F3F4F6}
+.qty-display{font-size:15px;font-weight:700;min-width:26px;text-align:center;color:#111827}
+.qty-label{font-size:12px;color:#6B7280}
+.pdf-btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:#185FA5;border:1px solid #BFDBFE;border-radius:8px;padding:5px 10px;background:#EFF6FF;cursor:pointer;text-decoration:none;font-family:inherit}
+.pdf-btn:hover{background:#DBEAFE}
+.checkbox-wrap{position:absolute;top:10px;left:10px;width:22px;height:22px;border:1.5px solid #D1D5DB;border-radius:5px;background:#fff;display:flex;align-items:center;justify-content:center}
+.item-card.selected .checkbox-wrap{background:#185FA5;border-color:#185FA5}
+.check-icon{color:white;font-size:13px;display:none}
+.item-card.selected .check-icon{display:block}
+
+/* 수령정보 */
+.form-section{background:#FAFAFA;border:1px solid #E5E7EB;border-radius:12px;padding:1.5rem;margin-bottom:1.75rem}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-group.full{grid-column:1/-1}
+.form-group label{font-size:13px;font-weight:700;color:#374151}
+.form-group input{height:42px;border:1px solid #E5E7EB;border-radius:9px;padding:0 14px;font-size:14px;background:#fff;color:#111827;font-family:inherit;transition:border-color .15s,box-shadow .15s}
+.form-group input:focus{outline:none;border-color:#185FA5;box-shadow:0 0 0 3px rgba(24,95,165,.1)}
+.addr-row{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+.addr-search-btn{height:42px;padding:0 16px;background:#185FA5;color:white;border:none;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;transition:background .15s}
+.addr-search-btn:hover{background:#0C447C}
+.form-group input+input{margin-top:8px}
+.req{color:#DC2626}
+
+/* 신청내역 */
+.summary-box{background:#F9FAFB;border:1px solid #E5E7EB;border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.25rem}
+.summary-group-label{font-size:11px;font-weight:700;color:#9CA3AF;letter-spacing:.05em;text-transform:uppercase;padding:5px 0 4px}
+.summary-item{display:flex;justify-content:space-between;align-items:center;font-size:13px;padding:5px 0;color:#111827;border-bottom:1px solid #E5E7EB}
+.summary-item:last-child{border-bottom:none}
+.summary-item span:last-child{font-weight:700;color:#185FA5}
+.delivery-box{background:#F0F7FF;border:1px solid #BFDBFE;border-radius:10px;padding:14px 18px;margin-bottom:1.25rem}
+.delivery-title{font-size:14px;font-weight:700;color:#1E40AF;margin-bottom:8px}
+.delivery-list{padding-left:16px;display:flex;flex-direction:column;gap:5px}
+.delivery-list li{font-size:13px;color:#374151;line-height:1.6}
+.delivery-list li strong{color:#1E40AF;font-weight:700}
+.submit-btn{width:100%;height:50px;background:#185FA5;color:white;border:none;border-radius:11px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s;margin-bottom:1.75rem}
+.submit-btn:hover{background:#0C447C}
+.submit-btn:disabled{background:#E5E7EB;color:#9CA3AF;cursor:not-allowed}
+
+.loading-state{display:flex;flex-direction:column;align-items:center;gap:12px;padding:3rem;color:#6B7280;font-size:14px}
+.spinner{width:32px;height:32px;border:3px solid #E5E7EB;border-top-color:#185FA5;border-radius:50%;animation:spin .8s linear infinite}
+.error-state{text-align:center;padding:2rem;color:#DC2626;font-size:13px;background:#FEF2F2;border-radius:8px;margin-bottom:1.5rem}
+.no-select{display:flex;flex-direction:column;align-items:center;gap:5px;padding:1rem;background:#F9FAFB;border-radius:8px;color:#6B7280;font-size:13px;margin-bottom:1.25rem;border:1px solid #E5E7EB}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#166534;color:#DCFCE7;padding:12px 22px;border-radius:10px;font-size:14px;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+.toast.show{opacity:1}
+.toast.error{background:#991B1B;color:#FEE2E2}
+
+/* 라이트박스 */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:1000;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem}
+.lightbox.open{display:flex}
+.lightbox-img-wrap{max-width:92vw;max-height:78vh;display:flex;align-items:center;justify-content:center}
+.lightbox-img-wrap img{max-width:100%;max-height:78vh;border-radius:12px;object-fit:contain}
+.lightbox-name{color:white;font-size:14px;font-weight:600;margin-bottom:1rem;text-align:center}
+.lightbox-close{margin-top:1rem;padding:10px 28px;border-radius:8px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);color:white;font-size:14px;cursor:pointer;font-family:inherit}
+
+/* ━━━ 모바일 반응형 ━━━ */
+@media (max-width: 600px) {
+  body{padding:0}
+  .page{border-radius:0;box-shadow:none}
+  .top-header{padding:1.25rem 1rem;gap:12px}
+  .logo-img{width:50px;height:50px;border-radius:13px}
+  .header-text h1{font-size:20px}
+  .header-text p{font-size:12px}
+  .inner{padding:1rem 1rem 2rem}
+  .tab-btn{padding:10px 16px;font-size:13.5px}
+  .items-grid{grid-template-columns:1fr;gap:12px}
+  .item-img{height:200px}
+  .form-grid{grid-template-columns:1fr}
+  .form-group.full{grid-column:1}
+  .form-group input{height:46px;font-size:16px}  /* 모바일 자동 확대 방지 */
+  .submit-btn{height:52px;font-size:15px}
+  .summary-item{font-size:12px}
+  .notice-text{font-size:12px}
+}
+@media (min-width:601px) and (max-width:900px) {
+  .items-grid{grid-template-columns:repeat(2,1fr)}
+  .inner{padding:1.25rem 1.5rem 2rem}
+}
+</style>
+</head>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<body>
+<div class="page">
+  <div class="top-header">
+    <img class="logo-img" src="data:image/jpeg;base64,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" alt="웰체크 로고"/>
+    <div class="header-text">
+      <h1>웰체크 홍보, 인쇄물 신청</h1>
+      <p>신청하실 홍보물을 선택하고 수령 정보를 입력해 주세요.</p>
+    </div>
+  </div>
+  <div class="inner">
+    <div class="notice-box">
+      <span class="notice-icon">⚠️</span>
+      <div>
+        <div class="notice-label">신청 전 반드시 확인해 주세요</div>
+        <div class="notice-text">비용 처리 및 인쇄·배송까지 <strong>2~3주 소요</strong>됩니다. <strong>미리, 충분한 수량</strong>을 신청해 주세요.</div>
+      </div>
+    </div>
+
+    <p class="section-title">홍보물 선택</p>
+    <div class="tab-bar">
+      <button class="tab-btn active" id="tab-general" onclick="switchTab('general')">병원 홍보물 <span class="tab-badge" id="badge-general">—</span></button>
+      <button class="tab-btn" id="tab-sales" onclick="switchTab('sales')">영업부 전용 홍보물 <span class="tab-badge" id="badge-sales">—</span></button>
+    </div>
+    <div id="panel-general"><div class="loading-state"><div class="spinner"></div>홍보물 목록 불러오는 중...</div></div>
+    <div id="panel-sales" style="display:none">
+      <div class="sales-notice"><i class="ti ti-shield-lock" style="font-size:16px;flex-shrink:0;margin-top:1px;color:#185FA5"></i><span>아래 홍보물은 <strong>영업부 직원만</strong> 신청 가능합니다.</span></div>
+      <div class="loading-state"><div class="spinner"></div>홍보물 목록 불러오는 중...</div>
+    </div>
+
+    <p class="section-title">수령 정보</p>
+    <div class="form-section"><div class="form-grid">
+      <div class="form-group"><label>수령자 성함 <span class="req">*</span></label><input type="text" id="f-name" placeholder="홍길동" autocomplete="name"/></div>
+      <div class="form-group"><label>연락처 <span class="req">*</span></label><input type="tel" id="f-phone" placeholder="010-0000-0000" autocomplete="tel"/></div>
+      <div class="form-group full">
+        <label>주소 <span class="req">*</span></label>
+        <div class="addr-row">
+          <input type="text" id="f-postcode" placeholder="우편번호" readonly style="width:130px;background:#F9FAFB;cursor:default"/>
+          <button type="button" class="addr-search-btn" onclick="searchAddress()"><i class="ti ti-search" style="font-size:13px;margin-right:4px"></i>주소 검색</button>
+        </div>
+        <input type="text" id="f-addr" placeholder="도로명 주소" readonly style="background:#F9FAFB;cursor:default"/>
+        <input type="text" id="f-addr-detail" placeholder="상세주소 입력 (동/호수 등)" autocomplete="address-line2"/>
+      </div>
+      <div class="form-group full"><label>병원명 / 사무소명 <span class="req">*</span></label><input type="text" id="f-org" placeholder="○○의원"/></div>
+    </div></div>
+
+    <p class="section-title">신청 내역 확인</p>
+    <div id="summary-area"><div class="no-select"><i class="ti ti-package" style="font-size:20px"></i>선택한 홍보물이 없습니다</div></div>
+
+    <div class="delivery-box">
+      <div class="delivery-title"><i class="ti ti-truck-delivery" style="font-size:15px;vertical-align:-2px;margin-right:6px"></i>배송 안내</div>
+      <ul class="delivery-list">
+        <li>비용 처리 및 인쇄·배송까지 <strong>2~3주 소요</strong>됩니다. 미리, 충분한 수량을 신청해 주세요.</li>
+        <li>홍보물이 분할 배송될 수 있습니다.</li>
+      </ul>
+    </div>
+
+    <button class="submit-btn" id="submit-btn" onclick="submitForm()">신청하기</button>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <p class="lightbox-name" id="lb-name"></p>
+  <div class="lightbox-img-wrap"><img id="lb-img" src="" alt=""/></div>
+  <button class="lightbox-close" onclick="closeLightbox()">닫기</button>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzVupaMzYHKMf9mf5c1f7wWQspk-w5m1vCFZmvn3CtNs7dfbHua7oZkhcBgRlIZodtTgg/exec";
+
+let items = [];
+const state = {};
+const imageCache = {};
+
+// ── 전화번호: 자유 입력 (02- 등 다양한 형식 허용) ──
+
+function isFileId(str) {
+  return str && !str.startsWith('http') && str.length > 10;
+}
+
+async function loadImage(imgVal) {
+  if (!imgVal) return null;
+  if (!isFileId(imgVal)) return imgVal;
+  if (imageCache[imgVal]) return imageCache[imgVal];
+  try {
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), 30000);
+    const res = await fetch(`${SCRIPT_URL}?action=getImage&id=${imgVal}`, {
+      signal: ctrl.signal,
+      cache: 'no-cache'
+    });
+    clearTimeout(t);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const json = await res.json();
+    if (!json.data) throw new Error('no data');
+    const dataUrl = `data:${json.mimeType};base64,${json.data}`;
+    imageCache[imgVal] = dataUrl;
+    return dataUrl;
+  } catch(err) {
+    console.warn('이미지 로드 실패:', imgVal, err);
+    return null;
+  }
+}
+
+async function loadItems() {
+  try {
+    // 타임아웃 30초 설정 (모바일 느린 네트워크 대응)
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 30000);
+    const res = await fetch(`${SCRIPT_URL}?action=getItems`, {
+      signal: controller.signal,
+      cache: 'no-cache'
+    });
+    clearTimeout(timer);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    items = data.map(row => ({
+      id:      Number(row.id),
+      name:    row.name,
+      unit:    row.unit,
+      tab:     row.tab,
+      pdf:     row.pdf,
+      img:     row.img || '',
+      qtyUnit: row.qtyUnit || '박스'
+    }));
+    items.forEach(it => { state[it.id] = 0; });
+    renderGrid('general');
+    renderGrid('sales');
+    // 백그라운드 프리로드
+    items.forEach(it => { if(it.img) loadImage(it.img); });
+  } catch(err) {
+    console.error('목록 로드 실패:', err);
+    const errMsg = err.name === 'AbortError'
+      ? '연결 시간이 초과됐습니다.<br>Wi-Fi 또는 데이터 연결을 확인 후 새로고침 해주세요.'
+      : '홍보물 목록을 불러오지 못했습니다.<br>페이지를 새로고침 해주세요.';
+    document.getElementById('panel-general').innerHTML =
+      `<div class="error-state">${errMsg}</div>`;
+    document.getElementById('panel-sales').innerHTML = '';
+  }
+}
+
+function switchTab(tab) {
+  ['general','sales'].forEach(t => {
+    document.getElementById('tab-'+t).classList.toggle('active', t===tab);
+    document.getElementById('panel-'+t).style.display = t===tab ? '' : 'none';
+  });
+}
+
+function cardHTML(it) {
+  const unit = it.qtyUnit || '박스';
+  const cached = imageCache[it.img] || (!isFileId(it.img) && it.img ? it.img : null);
+  const imgContent = cached
+    ? `<img src="${cached}" alt="${it.name}"/>`
+    : it.img
+      ? `<div class="img-loading"><div class="img-spinner"></div><span>로딩 중...</span></div>`
+      : `<div class="img-placeholder"><i class="ti ti-photo" style="font-size:32px"></i><span>이미지 없음</span></div>`;
+
+  return `<div class="item-card${state[it.id]>0?' selected':''}" id="card-${it.id}" onclick="toggleCard(${it.id},event)">
+    <div class="checkbox-wrap"><span class="check-icon"><i class="ti ti-check"></i></span></div>
+    <div class="item-img" id="img-wrap-${it.id}" onclick="openLightbox(${it.id},event)">
+      ${imgContent}
+      ${cached ? `<div class="img-overlay"><span>크게 보기</span></div>` : ''}
+    </div>
+    <p class="item-name">${it.name}</p>
+    ${it.unit && it.unit.includes('1인') ? `<p class="item-unit-special">📋 ${it.unit}</p>` : `<p class="item-unit">주문단위: ${it.unit}</p>`}
+    <div class="card-actions" onclick="event.stopPropagation()">
+      <div class="qty-row">
+        <button class="qty-btn" onclick="changeQty(${it.id},-1)">−</button>
+        <span class="qty-display" id="qty-${it.id}">${state[it.id]}</span>
+        <button class="qty-btn" onclick="changeQty(${it.id},1)">+</button>
+        <span class="qty-label">${unit}</span>
+      </div>
+      <a class="pdf-btn" href="${it.pdf}" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+        <i class="ti ti-file-type-pdf" style="font-size:12px"></i>PDF
+      </a>
+    </div>
+  </div>`;
+}
+
+async function updateCardImage(it) {
+  const src = await loadImage(it.img);
+  if (!src) return;
+  const el = document.getElementById('img-wrap-'+it.id);
+  if (!el) return;
+  el.innerHTML = `<img src="${src}" alt="${it.name}"/><div class="img-overlay"><span>크게 보기</span></div>`;
+}
+
+function renderGrid(tab) {
+  const ti = items.filter(it => it.tab === tab);
+  if (tab === 'general') {
+    document.getElementById('panel-general').innerHTML =
+      ti.length ? `<div class="items-grid">${ti.map(cardHTML).join('')}</div>`
+                : '<div class="no-select">병원 홍보물이 없습니다</div>';
+  } else {
+    document.getElementById('panel-sales').innerHTML = `
+      <div class="sales-notice"><i class="ti ti-shield-lock" style="font-size:16px;flex-shrink:0;margin-top:1px;color:#185FA5"></i>
+      <span>아래 홍보물은 <strong>영업부 직원만</strong> 신청 가능합니다.</span></div>
+      ${ti.length ? `<div class="items-grid">${ti.map(cardHTML).join('')}</div>`
+                  : '<div class="no-select">영업부 전용 홍보물이 없습니다</div>'}`;
+  }
+  updateBadge(tab);
+  ti.filter(it => it.img && !imageCache[it.img] && isFileId(it.img))
+    .forEach(it => updateCardImage(it));
+}
+
+function updateBadge(tab) {
+  const count = items.filter(it=>it.tab===tab&&state[it.id]>0).length;
+  const total = items.filter(it=>it.tab===tab).length;
+  const badge = document.getElementById('badge-'+tab);
+  if(!badge) return;
+  if(count>0){badge.textContent=count+'개 선택';badge.style.background='#DBEAFE';badge.style.color='#185FA5';}
+  else{badge.textContent=total;badge.style.background='';badge.style.color='';}
+}
+
+function toggleCard(id,e) {
+  if(e&&(e.target.closest('.qty-row')||e.target.tagName==='A')) return;
+  state[id]=state[id]>0?0:1;
+  renderGrid(items.find(i=>i.id===id).tab);renderSummary();
+}
+
+function changeQty(id,d) {
+  state[id]=Math.max(0,state[id]+d);
+  const el=document.getElementById('qty-'+id);if(el)el.textContent=state[id];
+  const card=document.getElementById('card-'+id);
+  if(card) state[id]>0?card.classList.add('selected'):card.classList.remove('selected');
+  updateBadge(items.find(i=>i.id===id).tab);renderSummary();
+}
+
+async function openLightbox(id,e) {
+  if(e) e.stopPropagation();
+  const it=items.find(i=>i.id===id);
+  if(!it||!it.img) return;
+  document.getElementById('lb-name').textContent=it.name;
+  document.getElementById('lb-img').src='';
+  document.getElementById('lightbox').classList.add('open');
+  const src = await loadImage(it.img);
+  if(src) document.getElementById('lb-img').src=src;
+}
+
+function closeLightbox(e) {
+  if(!e||e.target===document.getElementById('lightbox')||e.target.classList.contains('lightbox-close'))
+    document.getElementById('lightbox').classList.remove('open');
+}
+
+function renderSummary() {
+  const area=document.getElementById('summary-area');
+  const gS=items.filter(it=>it.tab==='general'&&state[it.id]>0);
+  const sS=items.filter(it=>it.tab==='sales'&&state[it.id]>0);
+  if(!gS.length&&!sS.length){area.innerHTML='<div class="no-select"><i class="ti ti-package" style="font-size:20px"></i>선택한 홍보물이 없습니다</div>';return;}
+  let h='<div class="summary-box">';
+  if(gS.length){
+    h+='<p class="summary-group-label">병원 홍보물</p>';
+    h+=gS.map(it=>{
+      const inner=it.unit?it.unit.match(/\(([^)]+)\)/):null;
+      const perBox=(inner&&!it.unit.includes('1인'))?` (${inner[1]})`:'';
+      return `<div class="summary-item"><span>${it.name}</span><span>${state[it.id]}${it.qtyUnit||'박스'}${perBox}</span></div>`;
+    }).join('');
+  }
+  if(sS.length){
+    h+=`<p class="summary-group-label" style="margin-top:${gS.length?'10px':'0'}">영업부 전용 홍보물</p>`;
+    h+=sS.map(it=>{
+      const inner=it.unit?it.unit.match(/\(([^)]+)\)/):null;
+      const perBox=(inner&&!it.unit.includes('1인'))?` (${inner[1]})`:'';
+      return `<div class="summary-item"><span>${it.name}</span><span>${state[it.id]}${it.qtyUnit||'박스'}${perBox}</span></div>`;
+    }).join('');
+  }
+  h+='</div>';area.innerHTML=h;
+}
+
+function showToast(msg,isError) {
+  const t=document.getElementById('toast');t.textContent=msg;
+  t.className='toast'+(isError?' error':'')+' show';
+  setTimeout(()=>t.classList.remove('show'),3500);
+}
+
+async function submitForm() {
+  const name=document.getElementById('f-name').value.trim();
+  const phone=document.getElementById('f-phone').value.trim();
+  const org=document.getElementById('f-org').value.trim();
+  const addrBase=document.getElementById('f-addr').value.trim();
+  const addrDetail=document.getElementById('f-addr-detail').value.trim();
+  const addr=addrDetail ? addrBase+' '+addrDetail : addrBase;
+  if(!name||!phone||!org||!addr){showToast('필수 항목을 모두 입력해 주세요.',true);return;}
+  if(!phone){showToast('연락처를 입력해 주세요.',true);return;}
+  const selected=items.filter(it=>state[it.id]>0);
+  if(!selected.length){showToast('홍보물을 하나 이상 선택해 주세요.',true);return;}
+  const itemsStr=selected.map(it=>`${it.name} (${state[it.id]}${it.qtyUnit||'박스'})`).join('\n');
+  const payload={name,phone,org,addr,items:itemsStr,timestamp:new Date().toLocaleString('ko-KR')};
+  const btn=document.getElementById('submit-btn');btn.disabled=true;btn.textContent='제출 중...';
+  try{
+    await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    showToast('신청이 완료됐습니다.');
+    items.forEach(it=>state[it.id]=0);
+    ['f-name','f-phone','f-org','f-addr','f-addr-detail','f-postcode'].forEach(id=>document.getElementById(id).value='');
+    renderGrid('general');renderGrid('sales');renderSummary();
+  }catch(err){showToast('제출 중 오류가 발생했습니다.',true);}
+  finally{btn.disabled=false;btn.textContent='신청하기';}
+}
+
+// ── 카카오 주소 검색 ──
+function searchAddress() {
+  new daum.Postcode({
+    oncomplete: function(data) {
+      // 도로명 주소 우선, 없으면 지번 주소
+      const addr = data.roadAddress || data.jibunAddress;
+      document.getElementById('f-postcode').value = data.zonecode;
+      document.getElementById('f-addr').value = addr;
+      // 상세주소 입력란으로 포커스 이동
+      document.getElementById('f-addr-detail').focus();
+    }
+  }).open();
+}
+
+loadItems();
+</script>
+</body></html>
